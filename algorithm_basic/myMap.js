@@ -25,9 +25,9 @@ let myMap = function (arr, fn) {
 }
 
 // 파라미터로 넘겨준 함수에 대한 설명입니다.
-// ' x => (x > 3) ' 이 함수는 아래의 함수와 동일합니다
+// ' x => (x + 3) ' 이 함수는 아래의 함수와 동일합니다
 function functionName ( parameter ) {
-  // parameter > 3 이 true면 true, false면 false를 리턴합니다
+  // parameter에 3을 더해 리턴합니다
   return parameter + 3;
 }
 
