@@ -89,30 +89,37 @@ class Garray {
 	mySplice() {}
 	myJoin(str) {
 		let insert = '';
-		let tmp = '';
 		let result = '';
+
 		if (str === undefined) {
 			insert += ',';
 		} else {
 			insert += str;
 		}
-		for (let value of this.value) {
-			tmp += String(value) + insert;
-		}
-		for (let i = 0; i < tmp.length - 1; i++) {
-			result += tmp[i];
+		for (let i = 0; i < this.length; i++) {
+			result += String(this.value[i]);
+			if (i !== this.length - 1) {
+				result += insert;
+			}
 		}
 		return result;
 	}
+
 	myConcat(...arr) {
-		for (let value of arr) {
-			this.myPush(value);
+		let tmpArr = [];
+		for (let index in this.value) {
+			tmpArr[index] = this.value[index];
 		}
+		for (let i = this.length; i < this.length + arr.length; i++) {
+			tmpArr[i] = arr[i - this.length];
+		}
+		return tmpArr;
 	}
 }
 
 // 1. 클래스를 이용해서 G-array() 만들고, 기존 Array() 메소드 실행해보기
 let myArray = new Garray(1, 2, 3);
+console.log('Using Array.prototype.method()');
 myArray.printInfo();
 myArray.value.push(4);
 myArray.printInfo();
@@ -122,6 +129,14 @@ myArray.value.pop();
 myArray.printInfo();
 myArray.value.shift();
 myArray.printInfo();
+let myArrayConcat = myArray.value.concat(4, 5, 6);
+console.log(myArrayConcat);
+myArray.printInfo();
+let myArrayJoin = myArray.value.join(' , ');
+console.log(myArrayJoin);
+myArray.printInfo();
+console.log(myArray);
+console.log(' ');
 /**
  * class가 선언될 때 constructor에서 length를 잡아줬습니다.
  * 이후 제 class method를 사용하지 않고, Array()에 선언된 메소드를 사용하면
@@ -131,8 +146,9 @@ myArray.printInfo();
 // 2. Garray() 클래스를 생성하고 새로운 array를 선언하여 Array() 메소드와 비교하기
 
 let myMethod = new Garray(1, 2, 3);
+console.log('Using Garray.prototype.method()');
 myMethod.printInfo();
-myMethod.myPush(5);
+myMethod.myPush(4);
 myMethod.printInfo();
 myMethod.myUnshift(0);
 myMethod.printInfo();
@@ -140,10 +156,11 @@ myMethod.myPop();
 myMethod.printInfo();
 myMethod.myShift();
 myMethod.printInfo();
-myMethod.myConcat(4, 5, 6);
+let myMethodMyConcat = myMethod.myConcat(4, 5, 6);
+console.log(myMethodMyConcat);
 myMethod.printInfo();
-let resultOfMyJoin = myMethod.myJoin(' ');
-console.log(resultOfMyJoin);
+let myMethodMyJoin = myMethod.myJoin(' , ');
+console.log(myMethodMyJoin);
 myMethod.printInfo();
 let a = myMethod.getArr();
 console.log(a);
