@@ -82,6 +82,17 @@ class Garray {
 			this.value[i] = tmpArr[i];
 		}
 	}
+
+	myMap() {}
+	myReduce() {}
+	mySlice() {}
+	mySplice() {}
+	myJoin() {}
+	myConcat(...arr) {
+		for (let value of arr) {
+			this.myPush(value);
+		}
+	}
 }
 
 // 1. 클래스를 이용해서 G-array() 만들고, 기존 Array() 메소드 실행해보기
@@ -112,6 +123,8 @@ myMethod.printInfo();
 myMethod.myPop();
 myMethod.printInfo();
 myMethod.myShift();
+myMethod.printInfo();
+myMethod.myConcat(4, 5, 6);
 myMethod.printInfo();
 let a = myMethod.getArr();
 console.log(a);
