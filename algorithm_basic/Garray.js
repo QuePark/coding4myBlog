@@ -87,7 +87,23 @@ class Garray {
 	myReduce() {}
 	mySlice() {}
 	mySplice() {}
-	myJoin() {}
+	myJoin(str) {
+		let insert = '';
+		let tmp = '';
+		let result = '';
+		if (str === undefined) {
+			insert += ',';
+		} else {
+			insert += str;
+		}
+		for (let value of this.value) {
+			tmp += String(value) + insert;
+		}
+		for (let i = 0; i < tmp.length - 1; i++) {
+			result += tmp[i];
+		}
+		return result;
+	}
 	myConcat(...arr) {
 		for (let value of arr) {
 			this.myPush(value);
@@ -125,6 +141,9 @@ myMethod.printInfo();
 myMethod.myShift();
 myMethod.printInfo();
 myMethod.myConcat(4, 5, 6);
+myMethod.printInfo();
+let resultOfMyJoin = myMethod.myJoin(' ');
+console.log(resultOfMyJoin);
 myMethod.printInfo();
 let a = myMethod.getArr();
 console.log(a);
