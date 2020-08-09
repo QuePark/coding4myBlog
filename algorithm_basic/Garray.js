@@ -131,8 +131,32 @@ class Garray {
 
 		return result;
 	}
-	myMap() {}
-	myReduce() {}
+
+	myMap(fn) {
+		let result = new Garray(0);
+		for (let value of this.value) {
+			result.myPush(fn(value));
+		}
+		return result;
+	}
+
+	myReduce(reducer, initialValue) {
+		if (typeof reducer !== 'function') {
+			return 'TYPEERROR: First parameter must be a function.\n';
+		}
+		if (initialValue === undefined) {
+			initialValue = this.value[0];
+		}
+
+		let result;
+		let accumulator = initialValue;
+
+		for (let currentValue of this.value) {
+			result = reducer(accumulator, currentValue);
+			accumulator = reducer(accumulator, currentValue);
+		}
+		return result;
+	}
 	mySlice() {}
 	mySplice() {}
 }
@@ -186,6 +210,12 @@ let a = myMethod.getArr();
 console.log(a);
 let b = myMethod.myFilter((x) => x > 2);
 console.log(b.value);
+myMethod.printInfo();
+let c = myMethod.myMap((x) => x + 2);
+console.log(c.value);
+myMethod.printInfo();
+let d = myMethod.myReduce((acc, cur) => Math.max(acc, cur));
+console.log(d);
 myMethod.printInfo();
 /**
  * 클래스에서 선언한 class method를 사용하면
