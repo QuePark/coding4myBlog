@@ -6,6 +6,8 @@
 
 /**
  * 이전까지 메소드를 설명하면서 각각의 기능을 구현해보았습니다
+ * https://dev-gp.tistory.com/category/JavaScript
+ *
  * 초보 개발자의 객기일지도 모르겠지만,
  * mdn에서 수없이 찾아본 Array() 메소드를 정복하기 위해서
  * Garray() 클래스를 생성해 보았습니다.
@@ -17,12 +19,18 @@ class Garray {
 		let obj = {};
 		let arr = [];
 		let length = 0;
-		for (let i = 0; i < elements.length; i++) {
-			obj[`${i}`] = elements[i];
-			length++;
-		}
-		for (let j = 0; j < length; j++) {
-			arr[j] = obj[j];
+		if (elements.length === 1 && typeof elements[0] === 'number') {
+			for (let i = 0; i < elements[0]; i++) {
+				arr[i] = null;
+			}
+		} else {
+			for (let i = 0; i < elements.length; i++) {
+				obj[`${i}`] = elements[i];
+				length++;
+			}
+			for (let j = 0; j < length; j++) {
+				arr[j] = obj[j];
+			}
 		}
 		this.value = arr;
 		this.length = length;
@@ -83,10 +91,6 @@ class Garray {
 		}
 	}
 
-	myMap() {}
-	myReduce() {}
-	mySlice() {}
-	mySplice() {}
 	myJoin(str) {
 		let insert = '';
 		let result = '';
@@ -115,6 +119,22 @@ class Garray {
 		}
 		return tmpArr;
 	}
+
+	myFilter(fn) {
+		let result = new Garray(0);
+
+		for (let value of this.value) {
+			if (fn(value)) {
+				result.myPush(value);
+			}
+		}
+
+		return result;
+	}
+	myMap() {}
+	myReduce() {}
+	mySlice() {}
+	mySplice() {}
 }
 
 // 1. 클래스를 이용해서 G-array() 만들고, 기존 Array() 메소드 실행해보기
@@ -143,7 +163,7 @@ console.log(' ');
  * 길이가 변하지 않습니다.
  */
 
-// 2. Garray() 클래스를 생성하고 새로운 array를 선언하여 Array() 메소드와 비교하기
+// 2. 클래스를 이용해서 G-array() 만들고, 내가 만든 메소드 실행해보기
 
 let myMethod = new Garray(1, 2, 3);
 console.log('Using Garray.prototype.method()');
@@ -164,6 +184,9 @@ console.log(myMethodMyJoin);
 myMethod.printInfo();
 let a = myMethod.getArr();
 console.log(a);
+let b = myMethod.myFilter((x) => x > 2);
+console.log(b.value);
+myMethod.printInfo();
 /**
  * 클래스에서 선언한 class method를 사용하면
  * 길이가 변하는 것을 확인할 수 있습니다.
