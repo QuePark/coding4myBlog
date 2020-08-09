@@ -176,7 +176,21 @@ class Garray {
 		}
 		return this.value;
 	}
-	mySplice() {}
+	mySplice(index, removeNumbers, ...replacement) {
+		if (removeNumbers === undefined || isNaN(Number(removeNumbers))) {
+			removeNumbers = 0;
+		}
+		if (replacement.length < 1) {
+			replacement[0] = '';
+		}
+		let newArr = new Garray(...this.value);
+		let previousArr = newArr.mySlice(0, index);
+		let lastArr = newArr.mySlice(index + removeNumbers);
+		for (let value of replacement) {
+			previousArr.push(value);
+		}
+		return previousArr.concat(lastArr);
+	}
 }
 
 // 1. 클래스를 이용해서 G-array() 만들고, 기존 Array() 메소드 실행해보기
@@ -219,24 +233,34 @@ myMethod.printInfo();
 myMethod.myShift();
 myMethod.printInfo();
 let myMethodMyConcat = myMethod.myConcat(4, 5, 6);
-console.log(myMethodMyConcat);
+console.log(
+	`Run a function (myConcat(4, 5, 6)), result is : ${myMethodMyConcat}`
+);
 myMethod.printInfo();
 let myMethodMyJoin = myMethod.myJoin(' , ');
-console.log(myMethodMyJoin);
+console.log(`Run a function (myJoin(' , ')), result is : ${myMethodMyJoin}`);
 myMethod.printInfo();
 let a = myMethod.getArr();
-console.log(a);
+console.log(`Run a function (getArr), result is : ${a}`);
 let b = myMethod.myFilter((x) => x > 2);
-console.log(b.value);
+console.log(`Run a function (myFilter((x) => x > 2)), result is : ${b.value}`);
 myMethod.printInfo();
 let c = myMethod.myMap((x) => x + 2);
-console.log(c.value);
+console.log(`Run a function (myMap((x) => x + 2)), result is : ${c.value}`);
 myMethod.printInfo();
 let d = myMethod.myReduce((acc, cur) => Math.max(acc, cur));
-console.log(d);
+console.log(
+	`Run a function (myReduce((acc, cur) => Math.max(acc, cur))), result is : ${d}`
+);
 myMethod.printInfo();
 let e = myMethod.mySlice(2, 3);
-console.log(e);
+console.log(`Run a function (mySlice(2, 3)), result is : ${e}`);
+myMethod.myPush(4);
+myMethod.myPush(5);
+myMethod.myPush(6);
+let f = myMethod.mySplice(2, 2, 1);
+console.log(`Run a function (mySplice(2, 2, 1)), result is : ${f}`);
+
 /**
  * 클래스에서 선언한 class method를 사용하면
  * 길이가 변하는 것을 확인할 수 있습니다.
