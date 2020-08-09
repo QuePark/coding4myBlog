@@ -157,7 +157,25 @@ class Garray {
 		}
 		return result;
 	}
-	mySlice() {}
+	mySlice(start, end) {
+		if (end === undefined) {
+			end = this.length;
+		}
+		if (!isNaN(Number(start)) || !isNaN(Number(end))) {
+			if (start >= this.length) {
+				return [];
+			}
+
+			let newArr = [];
+			for (let i = 0; i < this.length; i++) {
+				if (start <= i && i < end) {
+					newArr[i - start] = this.value[i];
+				}
+			}
+			return newArr;
+		}
+		return this.value;
+	}
 	mySplice() {}
 }
 
@@ -217,6 +235,8 @@ myMethod.printInfo();
 let d = myMethod.myReduce((acc, cur) => Math.max(acc, cur));
 console.log(d);
 myMethod.printInfo();
+let e = myMethod.mySlice(2, 3);
+console.log(e);
 /**
  * 클래스에서 선언한 class method를 사용하면
  * 길이가 변하는 것을 확인할 수 있습니다.
