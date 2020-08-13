@@ -1,24 +1,24 @@
 let mySlice = function (arr, a, b) {
-  if ( !Array.isArray(arr) ) {
-    return 'ERROR: First parameter must be an array.\n'
-  }
-  if ( typeof(a) === 'number' && ( typeof(b) === 'number' || b === undefined) ) {
-    if ( a >= arr.length ) {
-      return [];
-    }
-    if ( b === undefined ) {
-      b = arr.length;
-    }
-    let newArr = [];
-    for ( let i = 0; i < arr.length; i++ ) {
-      if ( a <= i && i < b ) {
-        newArr[i-a] = arr[i];
-      }
-    }
-    return newArr;
-  }
-  return arr;
-}
+	if (!Array.isArray(arr)) {
+		return 'ERROR: First parameter must be an array.\n';
+	}
+	if (typeof a === 'number' && (typeof b === 'number' || b === undefined)) {
+		if (a >= arr.length) {
+			return [];
+		}
+		if (b === undefined) {
+			b = arr.length;
+		}
+		let newArr = [];
+		for (let i = 0; i < arr.length; i++) {
+			if (a <= i && i < b) {
+				newArr[i - a] = arr[i];
+			}
+		}
+		return newArr;
+	}
+	return arr;
+};
 let arr = [0, 1, 2, 3, 4, 5];
 console.log('arr', arr);
 // [0, 1, 2, 3, 4, 5]
