@@ -1,3 +1,4 @@
+/**
 const roles = ['진행자', '타이머', '서기', '리액션1', '리액션2'];
 const names = ['하정님', '시영님', '폴님', '현진님', '규하님'];
 let values = [0, 1, 2, 3, 4];
@@ -28,6 +29,32 @@ const members = [
 		role: undefined,
 	},
 ];
+ */
+const roles = ['진행자', '타이머', '서기', '리액션1'];
+const names = ['하정님', '시영님', '폴님', '규하님'];
+let values = [0, 1, 2, 3];
+const members = [
+	{
+		name: '폴님',
+		value: 0,
+		role: undefined,
+	},
+	{
+		name: '시영님',
+		value: 0,
+		role: undefined,
+	},
+	{
+		name: '규하님',
+		value: 0,
+		role: undefined,
+	},
+	{
+		name: '하정님',
+		value: 0,
+		role: undefined,
+	},
+];
 
 const generateRandomNumber = (num = 5) => {
 	return Math.floor(Math.random() * num);
@@ -39,7 +66,7 @@ const checkValue = (arr) => {
 	for (let i = 0; i < values.length - 1; i++) {
 		for (let j = i + 1; j < values.length; j++) {
 			if (values[i] === values[j]) {
-				values[i] = generateRandomNumber();
+				values[i] = generateRandomNumber(members.length);
 				flag = true;
 				break;
 			}
@@ -57,7 +84,7 @@ const setValue = () => {
 	let pick;
 
 	for (let i = 0; i < members.length; i++) {
-		pick = generateRandomNumber();
+		pick = generateRandomNumber(members.length);
 		values[pick] = i;
 		values[i] = pick;
 	}
