@@ -5,7 +5,6 @@ export const bubbleSort = (ranArr, printFlag) => {
 	let flag = false;
 	do {
 		flag = false;
-		let previous = ranArr[0];
 		for (let i = 1; i < len; i++) {
 			if (ranArr[i - 1] > ranArr[i]) {
 				let tmp = ranArr[i - 1];
