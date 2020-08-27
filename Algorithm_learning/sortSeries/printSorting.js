@@ -1,4 +1,5 @@
 import { bubbleSort } from './bubbleSort.js';
+import { insertionSort } from './insertionSort.js';
 
 export const print = (ranArr, sortingFn) => {
 	for (let i = 0; i < ranArr.length; i++) {
@@ -27,7 +28,7 @@ const generateRandomNumberArr = (max) => {
 
 const init = () => {
 	const randomNumberArray = generateRandomNumberArr(10);
-	print(randomNumberArray, bubbleSort);
+	print(randomNumberArray, insertionSort);
 };
 
 init();
