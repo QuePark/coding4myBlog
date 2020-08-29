@@ -14,8 +14,10 @@ export const bubbleSort = (ranArr, printFlag) => {
 			}
 		}
 		if (printFlag) {
-			print(ranArr);
+			print(ranArr, 0, false);
 		}
 		len--;
 	} while (flag);
+
+	return ranArr;
 };

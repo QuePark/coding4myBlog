@@ -12,7 +12,7 @@ export const insertionSort = (ranArr, printFlag) => {
 			}
 		}
 		if (printFlag) {
-			print(ranArr);
+			print(ranArr, 0, false);
 		}
 	}
 
