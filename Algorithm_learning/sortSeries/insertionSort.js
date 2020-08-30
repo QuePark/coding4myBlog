@@ -9,6 +9,8 @@ export const insertionSort = (ranArr, printFlag) => {
 			if (tmp < ranArr[j]) {
 				ranArr[j + 1] = ranArr[j];
 				ranArr[j] = tmp;
+			} else {
+				break;
 			}
 		}
 		if (printFlag) {
